@@ -1,0 +1,265 @@
+{
+    "streamdeck_ui_version": 1,
+    "state": {
+        "AL35J2C20125": {
+            "buttons": {
+                "0": {
+                    "0": {
+                        "icon": "",
+                        "text": "htop",
+                        "command": "gnome-terminal -- /bin/sh -c 'htop'",
+                        "switch_page": 0,
+                        "write": ""
+                    },
+                    "1": {
+                        "text": "weather",
+                        "command": "gnome-terminal --geometry=1440x640 --zoom=1.0 -- /bin/sh -c 'curl -s wttr.in; sleep 10; exec bash'"
+                    },
+                    "2": {},
+                    "3": {},
+                    "4": {
+                        "command": "/usr/local/bin/Plexamp-3.5.0.AppImage",
+                        "text": "PlexAmp"
+                    },
+                    "5": {},
+                    "6": {},
+                    "7": {},
+                    "8": {
+                        "keys": ""
+                    },
+                    "9": {},
+                    "10": {
+                        "text": "Previous",
+                        "switch_page": 10
+                    },
+                    "11": {
+                        "text": "vs code",
+                        "command": "xdotool search --name '^.+Visual Studio Code$' windowactivate"
+                    },
+                    "12": {
+                        "text": "git commit",
+                        "command": "xdotool search --name '^.+Visual Studio Code$' windowactivate --sync key ctrl+alt+2"
+                    },
+                    "13": {
+                        "text": "git push",
+                        "command": "xdotool search --name '^.+Visual Studio Code$' windowactivate --sync key ctrl+alt+1"
+                    },
+                    "14": {
+                        "text": "Next",
+                        "switch_page": 2
+                    }
+                },
+                "1": {
+                    "0": {},
+                    "1": {},
+                    "2": {},
+                    "3": {},
+                    "4": {},
+                    "5": {},
+                    "6": {},
+                    "7": {},
+                    "8": {},
+                    "9": {},
+                    "10": {
+                        "text": "Previous",
+                        "switch_page": 1
+                    },
+                    "11": {},
+                    "12": {},
+                    "13": {},
+                    "14": {
+                        "switch_page": 3,
+                        "text": "Next"
+                    }
+                },
+                "2": {
+                    "0": {},
+                    "1": {},
+                    "2": {},
+                    "3": {},
+                    "4": {},
+                    "5": {},
+                    "6": {},
+                    "7": {},
+                    "8": {},
+                    "9": {},
+                    "10": {
+                        "text": "Previous",
+                        "switch_page": 2
+                    },
+                    "11": {},
+                    "12": {},
+                    "13": {},
+                    "14": {
+                        "switch_page": 4,
+                        "text": "Next"
+                    }
+                },
+                "3": {
+                    "0": {},
+                    "1": {},
+                    "2": {},
+                    "3": {},
+                    "4": {},
+                    "5": {},
+                    "6": {},
+                    "7": {},
+                    "8": {},
+                    "9": {},
+                    "10": {
+                        "text": "Previous",
+                        "switch_page": 3
+                    },
+                    "11": {},
+                    "12": {},
+                    "13": {},
+                    "14": {
+                        "text": "Next",
+                        "switch_page": 5
+                    }
+                },
+                "4": {
+                    "0": {},
+                    "1": {},
+                    "2": {},
+                    "3": {},
+                    "4": {},
+                    "5": {},
+                    "6": {},
+                    "7": {},
+                    "8": {},
+                    "9": {},
+                    "10": {
+                        "text": "Previous",
+                        "switch_page": 4
+                    },
+                    "11": {},
+                    "12": {},
+                    "13": {},
+                    "14": {
+                        "text": "Next",
+                        "switch_page": 6
+                    }
+                },
+                "5": {
+                    "0": {},
+                    "1": {},
+                    "2": {},
+                    "3": {},
+                    "4": {},
+                    "5": {},
+                    "6": {},
+                    "7": {},
+                    "8": {},
+                    "9": {},
+                    "10": {
+                        "text": "Previous",
+                        "switch_page": 5
+                    },
+                    "11": {},
+                    "12": {},
+                    "13": {},
+                    "14": {
+                        "text": "Next",
+                        "switch_page": 7
+                    }
+                },
+                "6": {
+                    "0": {},
+                    "1": {},
+                    "2": {},
+                    "3": {},
+                    "4": {},
+                    "5": {},
+                    "6": {},
+                    "7": {},
+                    "8": {},
+                    "9": {},
+                    "10": {
+                        "text": "Previous",
+                        "switch_page": 6
+                    },
+                    "11": {},
+                    "12": {},
+                    "13": {},
+                    "14": {
+                        "text": "Next",
+                        "switch_page": 8
+                    }
+                },
+                "7": {
+                    "0": {},
+                    "1": {},
+                    "2": {},
+                    "3": {},
+                    "4": {},
+                    "5": {},
+                    "6": {},
+                    "7": {},
+                    "8": {},
+                    "9": {},
+                    "10": {
+                        "text": "Previous",
+                        "switch_page": 7
+                    },
+                    "11": {},
+                    "12": {},
+                    "13": {},
+                    "14": {
+                        "text": "Next",
+                        "switch_page": 9
+                    }
+                },
+                "8": {
+                    "0": {},
+                    "1": {},
+                    "2": {},
+                    "3": {},
+                    "4": {},
+                    "5": {},
+                    "6": {},
+                    "7": {},
+                    "8": {},
+                    "9": {},
+                    "10": {
+                        "text": "Previous",
+                        "switch_page": 8
+                    },
+                    "11": {},
+                    "12": {},
+                    "13": {},
+                    "14": {
+                        "text": "Next",
+                        "switch_page": 10
+                    }
+                },
+                "9": {
+                    "0": {},
+                    "1": {},
+                    "2": {},
+                    "3": {},
+                    "4": {},
+                    "5": {},
+                    "6": {},
+                    "7": {},
+                    "8": {},
+                    "9": {},
+                    "10": {
+                        "text": "Previous",
+                        "switch_page": 9
+                    },
+                    "11": {},
+                    "12": {},
+                    "13": {},
+                    "14": {
+                        "text": "Next",
+                        "switch_page": 1
+                    }
+                }
+            },
+            "display_timeout": 900,
+            "brightness": 69,
+            "page": 0
+        }
+    }
+}
