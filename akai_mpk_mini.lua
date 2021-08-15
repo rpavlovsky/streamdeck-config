@@ -1,7 +1,7 @@
 --[[       AKAI MPK Mini Mark 2 MIDI Controller Deck Config       ]]--
 -- [             by: Rich Pavlovsky (rich@pavlovs.ky)             ] --
 -- [      M2i by: Samuel Nicholas <nicholas.samuel@gmail.com>     ] --
--- [  updated on: 21-Jan-21 -- Testing office Windows automation  ] --
+-- [  updated on: 15-Aug-21 -- Testing Pulse Audio integration    ] --
 
 --[[ Keystrokes defined by X11\kesymdef.h, friendly macro names   ]]--
 XK_BackSpace                   = 0xff08  --/* Back space, back char */
@@ -450,7 +450,7 @@ jogdial = {
 -- dB  gain  with  dB  suffix  (like -12.5dB), or an exact hardware
 -- value.
 
-voldial = {
+voldial = {  -- the master volume of the linux host as known by pulse
     counter = 0,
     turn = function( event )
         -- step by units of 5
@@ -465,7 +465,7 @@ voldial = {
     end
 }
 
-micdial = {
+micdial = { -- the microphone input, know as Capture by pulse
     counter = 0,
     turn = function( event )
         if( micdial.counter < 5 ) then
@@ -479,7 +479,7 @@ micdial = {
     end
 }
 
-brightdial = {
+brightdial = { -- i'm not using this yet.
     counter = 0,
     turn = function( event )
         if( voldial.counter < 5 ) then
@@ -498,7 +498,7 @@ brightdial = {
     end
 }
 
-tempdial = {
+tempdial = {  -- gnome night light and this controls color temp in Kelvin
     counter = 0,
     turn = function( event )
         if( tempdial.counter < 5 ) then
