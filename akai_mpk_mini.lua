@@ -444,10 +444,45 @@ jogdial = {
     end
 }
 
+-- Linux amixer help detail:
+-- Sets the simple mixer control contents. The parameter can be the
+-- volume either as a percentage from 0% to 100% with %  suffix,  a
+-- dB  gain  with  dB  suffix  (like -12.5dB), or an exact hardware
+-- value.
+
 voldial = {
     counter = 0,
     turn = function( event )
-        if( voldial.counter < 10 ) then
+        -- step by units of 5
+        if( voldial.counter < 5 ) then
+            voldial.counter = voldial.counter + 1
+            return
+        else
+            voldial.counter = 0
+        end
+
+        exec( "/usr/bin/amixer -D pulse sset Master " .. tostring(event[3]) .. "%" )
+    end
+}
+
+micdial = {
+    counter = 0,
+    turn = function( event )
+        if( micdial.counter < 5 ) then
+            micdial.counter = micdial.counter + 1
+            return
+        else
+            micdial.counter = 0
+        end
+
+        exec( "/usr/bin/amixer -D pulse sset Capture " .. tostring(event[3]) .. "%" )
+    end
+}
+
+brightdial = {
+    counter = 0,
+    turn = function( event )
+        if( voldial.counter < 5 ) then
             voldial.counter = voldial.counter + 1
             return
         else
@@ -455,10 +490,10 @@ voldial = {
         end
 
         if event[3] < 64 then
-            kpress( event, { XK_Shift_L, XK_Control_L, XK_Down } )
+           exec( "/usr/bin/amixer -D pulse sset Master 20%-" ) 
         end
         if event[3] > 64 then
-            kpress( event, { XK_Shift_L, XK_Control_L, XK_Up } )
+           exec( "/usr/bin/amixer -D pulse sset Master 20%+" ) 
         end
     end
 }
@@ -466,19 +501,17 @@ voldial = {
 tempdial = {
     counter = 0,
     turn = function( event )
-        if( tempdial.counter < 10 ) then
+        if( tempdial.counter < 5 ) then
             tempdial.counter = tempdial.counter + 1
             return
         else
             tempdial.counter = 0
         end
 
-        if event[3] < 64 then
-            exec("gsettings set org.gnome.settings-daemon.plugins.color night-light-temperature 2000") 
-        end
-        if event[3] > 64 then
-            exec("gsettings set org.gnome.settings-daemon.plugins.color night-light-temperature 6000") 
-        end
+        kelvin_temp = math.floor(event[3] * 50)
+
+        exec( "gsettings set org.gnome.settings-daemon.plugins.color night-light-temperature " .. tostring(kelvin_temp) ) 
+
     end
 }
 
@@ -555,24 +588,26 @@ default.map = {}
 --DECK A:RED Note-On functions
 default.map[0x90 + controller.DECKA.channel ]= {
     [ XC_PAD09 ] = { ['*'] = 
-        function( event) exec( "/usr/bin/gnome-terminal -- /bin/sh -c 'htop'") end },
+        function( event ) exec( "/usr/bin/gnome-terminal -- /bin/sh -c 'htop'") end },
     [ XC_PAD10 ] = { ['*'] =
-        function( event ) kpress( event, { XK_Alt_L, XK_A } ) end },
+        function( event ) exec( "/usr/bin/gnome-terminal -- /bin/sh -c 'htop'") end },
     [ XC_PAD11 ] = { ['*'] = 
-        function( event ) kpress( event, { XK_Alt_L, XK_V } ) end },
+        function( event ) exec( "/usr/bin/gnome-terminal -- /bin/sh -c 'htop'") end },
     [ XC_KEY01 ] = { ['*'] =
-        function( event ) kpress( event, { XK_space } ) end },
+        function( event ) exec( "/usr/bin/gnome-terminal -- /bin/sh -c 'htop'") end },
     [ XC_KEY02 ] = { ['*'] =
-        function( event ) kpress( event, { XK_Shift_L } ) end },
+        function( event ) exec( "/usr/bin/gnome-terminal -- /bin/sh -c 'htop'") end },
     [ XC_KEY03 ] = { ['*'] =
-        function( event ) kpress( event, {XK_Control_L, XK_Shift_L, XK_R} ) end },
+        function( event ) exec( "/usr/bin/gnome-terminal -- /bin/sh -c 'htop'") end },
 
 }
 
 --DECK A:RED control signals
 default.map[0xB0 + controller.DECKA.channel ] = {
-    [ XC_KNOB2 ] = { ['*'] =  voldial.turn },
-    [ XC_KNOB3  ] = { ['*'] = tempdial.turn },
+    [ XC_KNOB1 ] = { ['*'] = voldial.turn },
+    [ XC_KNOB2 ] = { ['*'] = micdial.turn },
+    [ XC_KNOB3 ] = { ['*'] = brightdial.turn },
+    [ XC_KNOB4 ] = { ['*'] = tempdial.turn },
 }
 
 --DECK A:RED Pitch Bend
