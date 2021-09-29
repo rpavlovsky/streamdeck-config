@@ -515,35 +515,65 @@ tempdial = {  -- gnome night light and this controls color temp in Kelvin
     end
 }
 
---[[ Gnome Terminal ]]--
-terminal = {}
-terminal.map = {}
-terminal.map[0x90 + controller.DECKA.channel] = {
-   [XC_KEY25] = {['*'] = function( event) kpress( event, { XK_G } ) end},
-   [XC_KEY24] = {['*'] = function( event) kpress( event, { XK_H } ) end},
-}
+keybrightdial = {  -- Keylight brightness dial
+    counter = 0,
+    turn = function( event )
+        if( keybrightdial.counter < 10 ) then
+            keybrightdial.counter = keybrightdial.counter + 1
+            return
+        else
+            keybrightdial.counter = 0
+        end
 
---[[ Discord ]]--
-discord = {}
-discord.map = {}
-discord.map[0x90 + controller.DECKA.channel] = {
-   [XC_KEY25] = {['*'] = function( event) kpress( event, { XK_G, XK_o, XK_o, XK_d, XK_space, XK_M, XK_o, XK_r, XK_n, XK_i, XK_n, XK_g  } ) end},
-   [XC_KEY24] = {['*'] = function( event) kpress( event, { XK_H } ) end},
-}
+        exec( "/usr/local/bin/keylight.py -i 192.168.1.23 -b " .. tostring(event[3]) ) 
 
---[[ Clementine ]]--
-clementine = {}
-clementine.next_prev = function( event )
-    if( event[3] > 65 ) then
-        exec( "clementine -r" )
-    else
-        exec( "clementine -f" )
     end
-end
+}
 
-clementine.play_pause = function( event )
-    exec( "clementine -t" )
-end
+keytempdial = {  -- Keylight temperature dial
+    counter = 0,
+    turn = function( event )
+        if( keytempdial.counter < 10 ) then
+            keytempdial.counter = keytempdial.counter + 1
+            return
+        else
+            keytempdial.counter = 0
+        end
+
+        exec( "/usr/local/bin/keylight.py -i 192.168.1.23 -t " .. tostring(event[3]) ) 
+
+    end
+}
+
+key2brightdial = {  -- Keylight brightness dial
+    counter = 0,
+    turn = function( event )
+        if( key2brightdial.counter < 10 ) then
+            key2brightdial.counter = key2brightdial.counter + 1
+            return
+        else
+            key2brightdial.counter = 0
+        end
+
+        exec( "/usr/local/bin/keylight.py -i 192.168.1.223 -b " .. tostring(event[3]) ) 
+
+    end
+}
+
+key2tempdial = {  -- Keylight temperature dial
+    counter = 0,
+    turn = function( event )
+        if( key2tempdial.counter < 10 ) then
+            key2tempdial.counter = key2tempdial.counter + 1
+            return
+        else
+            key2tempdial.counter = 0
+        end
+
+        exec( "/usr/local/bin/keylight.py -i 192.168.1.223 -t " .. tostring(event[3]) ) 
+
+    end
+}
 
 --[[ Pulse Audio ]]--
 pa = {
@@ -587,18 +617,10 @@ default.map = {}
 
 --DECK A:RED Note-On functions
 default.map[0x90 + controller.DECKA.channel ]= {
-    [ XC_PAD09 ] = { ['*'] = 
-        function( event ) exec( "/usr/bin/gnome-terminal -- /bin/sh -c 'htop'") end },
-    [ XC_PAD10 ] = { ['*'] =
-        function( event ) exec( "/usr/bin/gnome-terminal -- /bin/sh -c 'htop'") end },
-    [ XC_PAD11 ] = { ['*'] = 
-        function( event ) exec( "/usr/bin/gnome-terminal -- /bin/sh -c 'htop'") end },
-    [ XC_KEY01 ] = { ['*'] =
-        function( event ) exec( "/usr/bin/gnome-terminal -- /bin/sh -c 'htop'") end },
-    [ XC_KEY02 ] = { ['*'] =
-        function( event ) exec( "/usr/bin/gnome-terminal -- /bin/sh -c 'htop'") end },
-    [ XC_KEY03 ] = { ['*'] =
-        function( event ) exec( "/usr/bin/gnome-terminal -- /bin/sh -c 'htop'") end },
+    [ XC_PAD16 ] = { ['*'] = 
+        function( event ) exec( "/usr/local/bin/keylight.py -i 192.168.1.23 -T 0") end },
+    [ XC_PAD12 ] = { ['*'] =
+        function( event ) exec( "/usr/local/bin/keylight.py -i 192.168.1.223 -T 0") end },
 
 }
 
@@ -608,6 +630,10 @@ default.map[0xB0 + controller.DECKA.channel ] = {
     [ XC_KNOB2 ] = { ['*'] = micdial.turn },
     [ XC_KNOB3 ] = { ['*'] = brightdial.turn },
     [ XC_KNOB4 ] = { ['*'] = tempdial.turn },
+    [ XC_KNOB5 ] = { ['*'] = keybrightdial.turn },
+    [ XC_KNOB6 ] = { ['*'] = key2brightdial.turn },
+    [ XC_KNOB7 ] = { ['*'] = keytempdial.turn },
+    [ XC_KNOB8 ] = { ['*'] = key2tempdial.turn },
 }
 
 --DECK A:RED Pitch Bend
@@ -620,9 +646,7 @@ default.map[0xE0 + controller.DECKA.channel] = {
 applications = {
     ["Banshee"] = Banshee,
     ["vlc"] = vlc,
-    ["mixxx"] = mixxx,
     ["ntcardvt"] = lightworks,
-    ["discord"] = discord,
     ["gnome-terminal-server"] = terminal,
 }
 
